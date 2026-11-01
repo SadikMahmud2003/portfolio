@@ -10,7 +10,7 @@ export const profile = {
   email: 'hello@sadikmahmud.dev',
   resume: '', // e.g. '/resume.pdf' (put the file in /public)
   socials: {
-    github: 'https://github.com/your-username',
+    github: 'https://github.com/SadikMahmud2003',
     linkedin: 'https://linkedin.com/in/your-username',
     facebook: '',
   },
