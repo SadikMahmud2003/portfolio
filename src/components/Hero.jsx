@@ -104,8 +104,14 @@ export default function Hero() {
             <span className="key">"role"</span>: <span className="str">"{profile.role}"</span>,
             {'\n'}
             {'  '}
-            <span className="key">"stack"</span>: [<span className="str">"Laravel"</span>,{' '}
-            <span className="str">"PHP"</span>, <span className="str">"React"</span>],{'\n'}
+            <span className="key">"stack"</span>: [
+            {profile.stack.map((t, i) => (
+              <span key={t}>
+                {i > 0 && ', '}
+                <span className="str">"{t}"</span>
+              </span>
+            ))}
+            ],{'\n'}
             {'  '}
             <span className="key">"location"</span>:{' '}
             <span className="str">"{profile.location}"</span>,{'\n'}
