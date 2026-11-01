@@ -5,6 +5,7 @@ const links = [
   ['about', 'About'],
   ['skills', 'Skills'],
   ['projects', 'Projects'],
+  ['github', 'Open source'],
   ['experience', 'Experience'],
   ['contact', 'Contact'],
 ]
@@ -12,12 +13,28 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [active, setActive] = useState('')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
     onScroll()
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  // Highlight the link for whichever section is in the middle of the viewport.
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { rootMargin: '-45% 0px -50% 0px' }
+    )
+    const t = setTimeout(() => {
+      document.querySelectorAll('section[id]').forEach((s) => observer.observe(s))
+    }, 1500)
+    return () => {
+      clearTimeout(t)
+      observer.disconnect()
+    }
   }, [])
 
   return (
@@ -35,7 +52,12 @@ export default function Navbar() {
       </button>
       <nav className={open ? 'nav-open' : ''}>
         {links.map(([id, label], i) => (
-          <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>
+          <a
+            key={id}
+            href={`#${id}`}
+            className={active === id ? 'active' : ''}
+            onClick={() => setOpen(false)}
+          >
             <span className="mono accent">0{i + 1}.</span> {label}
           </a>
         ))}

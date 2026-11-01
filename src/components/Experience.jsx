@@ -3,7 +3,7 @@ import { Reveal, Section } from './ui.jsx'
 
 export default function Experience() {
   return (
-    <Section id="experience" index="04" title="Where I've worked">
+    <Section id="experience" index="05" title="Where I've worked">
       <ol className="timeline">
         {experience.map((job, i) => (
           <Reveal key={job.company + job.role} delay={i * 0.1}>

@@ -9,6 +9,8 @@ export const profile = {
   location: 'Bangladesh',
   email: 'hello@sadikmahmud.dev',
   resume: '', // e.g. '/resume.pdf' (put the file in /public)
+  githubUser: 'SadikMahmud2003', // used for avatar + live repos
+  available: true, // shows the "Available for work" badge
   socials: {
     github: 'https://github.com/SadikMahmud2003',
     linkedin: 'https://linkedin.com/in/your-username',
@@ -39,6 +41,10 @@ export const skills = [
   {
     title: 'Database',
     items: ['MySQL', 'PostgreSQL', 'Redis', 'Eloquent ORM', 'Query Optimization'],
+  },
+  {
+    title: 'Web3',
+    items: ['Solidity', 'Smart Contracts', 'ERC-20 / ERC-721', 'Hardhat', 'Ethers.js'],
   },
   {
     title: 'DevOps & Tools',
