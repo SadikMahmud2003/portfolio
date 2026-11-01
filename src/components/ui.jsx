@@ -1,51 +1,39 @@
 import { motion } from 'framer-motion'
 
-export function Reveal({ children, delay = 0, className }) {
+export function Reveal({ children, delay = 0, className, as = 'div' }) {
+  const Tag = motion[as]
   return (
-    <motion.div
+    <Tag
       className={className}
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
-    </motion.div>
+    </Tag>
   )
 }
 
-export function Section({ id, index, title, children }) {
+export function Section({ id, eyebrow, title, intro, children }) {
   return (
     <section id={id} className="section">
-      <Reveal>
-        <h2 className="section-title">
-          <span className="mono accent">{index}.</span> {title}
-        </h2>
+      <Reveal className="section-head">
+        <p className="eyebrow">{eyebrow}</p>
+        <h2 className="section-title">{title}</h2>
+        {intro && <p className="section-intro">{intro}</p>}
       </Reveal>
       {children}
     </section>
   )
 }
 
-// Card with a cursor-following glow and a subtle 3D tilt.
-export function Spotlight({ children, className = '' }) {
-  const onMove = (e) => {
-    const el = e.currentTarget
-    const r = el.getBoundingClientRect()
-    const x = e.clientX - r.left
-    const y = e.clientY - r.top
-    el.style.setProperty('--x', `${x}px`)
-    el.style.setProperty('--y', `${y}px`)
-    const rx = ((y / r.height) - 0.5) * -8
-    const ry = ((x / r.width) - 0.5) * 8
-    el.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`
-  }
-  const onLeave = (e) => {
-    e.currentTarget.style.transform = ''
-  }
+export function Tags({ items }) {
   return (
-    <div className={`card ${className}`} onMouseMove={onMove} onMouseLeave={onLeave}>
-      {children}
-    </div>
+    <ul className="tags">
+      {items.map((t) => (
+        <li key={t}>{t}</li>
+      ))}
+    </ul>
   )
 }

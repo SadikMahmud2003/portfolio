@@ -1,6 +1,6 @@
 const base = {
-  width: 20,
-  height: 20,
+  width: 18,
+  height: 18,
   viewBox: '0 0 24 24',
   fill: 'none',
   stroke: 'currentColor',
@@ -23,28 +23,26 @@ export const icons = {
       <circle cx="4" cy="4" r="2" />
     </svg>
   ),
-  facebook: (
-    <svg {...base}>
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-    </svg>
-  ),
   mail: (
     <svg {...base}>
       <rect x="2" y="4" width="20" height="16" rx="2" />
       <path d="m22 7-10 6L2 7" />
     </svg>
   ),
-  star: (
+  pin: (
     <svg {...base} width={15} height={15}>
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
     </svg>
   ),
-  fork: (
-    <svg {...base} width={15} height={15}>
-      <circle cx="6" cy="5" r="2" />
-      <circle cx="18" cy="5" r="2" />
-      <circle cx="12" cy="19" r="2" />
-      <path d="M6 7v2a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V7M12 12v5" />
+  download: (
+    <svg {...base} width={16} height={16}>
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+    </svg>
+  ),
+  star: (
+    <svg {...base} width={14} height={14}>
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
     </svg>
   ),
   copy: (
@@ -53,9 +51,40 @@ export const icons = {
       <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
     </svg>
   ),
-  arrow: (
+  check: (
     <svg {...base} width={16} height={16}>
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
+  ),
+  arrow: (
+    <svg {...base} width={15} height={15}>
       <path d="M7 17 17 7M7 7h10v10" />
+    </svg>
+  ),
+  right: (
+    <svg {...base} width={16} height={16}>
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  ),
+  sun: (
+    <svg {...base}>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+    </svg>
+  ),
+  moon: (
+    <svg {...base}>
+      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+    </svg>
+  ),
+  menu: (
+    <svg {...base} width={22} height={22}>
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
+  ),
+  close: (
+    <svg {...base} width={22} height={22}>
+      <path d="M18 6 6 18M6 6l12 12" />
     </svg>
   ),
 }

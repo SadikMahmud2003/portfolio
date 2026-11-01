@@ -1,27 +1,35 @@
-import { about, stats } from '../data.js'
+import { about, facts, principles } from '../data.js'
 import { Reveal, Section } from './ui.jsx'
 
 export default function About() {
   return (
-    <Section id="about" index="01" title="About me">
+    <Section id="about" eyebrow="About" title="A little about me">
       <div className="about-grid">
-        <div>
-          {about.map((p, i) => (
-            <Reveal key={i} delay={i * 0.1}>
-              <p className="about-text">{p}</p>
-            </Reveal>
+        <Reveal>
+          {about.map((p) => (
+            <p key={p} className="prose">
+              {p}
+            </p>
           ))}
-        </div>
-        <div className="stats">
-          {stats.map((s, i) => (
-            <Reveal key={s.label} delay={0.15 + i * 0.1}>
-              <div className="stat">
-                <span className="stat-value gradient-text">{s.value}</span>
-                <span className="stat-label">{s.label}</span>
+          <h3 className="subhead">How I work</h3>
+          <ul className="principles">
+            {principles.map(([lead, text]) => (
+              <li key={lead}>
+                <strong>{lead}</strong> {text}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <dl className="facts">
+            {facts.map((f) => (
+              <div key={f.label} className="fact">
+                <dt>{f.value}</dt>
+                <dd>{f.label}</dd>
               </div>
-            </Reveal>
-          ))}
-        </div>
+            ))}
+          </dl>
+        </Reveal>
       </div>
     </Section>
   )

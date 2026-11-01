@@ -1,23 +1,24 @@
 import { useEffect, useState } from 'react'
 import { profile } from '../data.js'
-import { Reveal, Section, Spotlight } from './ui.jsx'
+import { Reveal } from './ui.jsx'
 import { icons } from './icons.jsx'
 
 const langColors = {
   JavaScript: '#f1e05a',
   TypeScript: '#3178c6',
-  PHP: '#8892bf',
+  PHP: '#4f5d95',
   Solidity: '#aa6746',
   Python: '#3572a5',
   HTML: '#e34c26',
   CSS: '#663399',
   Vue: '#41b883',
   Blade: '#f7523f',
+  'Jupyter Notebook': '#da5b0b',
 }
 
 const prettify = (name) => name.replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim()
 
-// Live repos from the GitHub API, so the section stays current without edits.
+// Live repos from the GitHub API, so the list stays current without edits.
 export default function GitHub() {
   const [repos, setRepos] = useState(null)
 
@@ -38,53 +39,40 @@ export default function GitHub() {
   if (repos && repos.length === 0) return null
 
   return (
-    <Section id="github" index="04" title="Open source">
-      <div className="repo-grid">
+    <div className="repos">
+      <Reveal className="repos-head">
+        <h3 className="subhead">On GitHub</h3>
+        <a href={profile.socials.github} target="_blank" rel="noreferrer" className="link">
+          View all {icons.arrow}
+        </a>
+      </Reveal>
+      <ul className="repo-list">
         {(repos ?? Array.from({ length: 3 })).map((r, i) =>
           r ? (
-            <Reveal key={r.id} delay={i * 0.06}>
-              <a href={r.html_url} target="_blank" rel="noreferrer" className="repo-link">
-                <Spotlight className="repo">
-                  <div className="repo-head">
-                    <span className="folder">{'</>'}</span>
-                    <span className="repo-arrow">{icons.arrow}</span>
-                  </div>
-                  <h3 className="repo-title">{prettify(r.name)}</h3>
-                  {r.description && <p className="muted small">{r.description}</p>}
-                  <div className="repo-meta mono small">
-                    {r.language && (
-                      <span>
-                        <i style={{ background: langColors[r.language] || '#8b6cff' }} />
-                        {r.language}
-                      </span>
-                    )}
+            <li key={r.id}>
+              <a href={r.html_url} target="_blank" rel="noreferrer" className="repo">
+                <span className="repo-name">{prettify(r.name)}</span>
+                {r.description && <span className="repo-desc">{r.description}</span>}
+                <span className="repo-meta">
+                  {r.language && (
+                    <span>
+                      <i style={{ background: langColors[r.language] || 'var(--muted)' }} />
+                      {r.language}
+                    </span>
+                  )}
+                  {r.stargazers_count > 0 && (
                     <span>
                       {icons.star} {r.stargazers_count}
                     </span>
-                    <span>
-                      {icons.fork} {r.forks_count}
-                    </span>
-                  </div>
-                </Spotlight>
+                  )}
+                </span>
               </a>
-            </Reveal>
+            </li>
           ) : (
-            <div key={i} className="card repo skeleton" />
+            <li key={i} className="repo skeleton" />
           )
         )}
-      </div>
-      <Reveal>
-        <div className="center-row">
-          <a
-            href={profile.socials.github}
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-ghost"
-          >
-            {icons.github} See all on GitHub
-          </a>
-        </div>
-      </Reveal>
-    </Section>
+      </ul>
+    </div>
   )
 }

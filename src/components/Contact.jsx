@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { profile } from '../data.js'
 import { Reveal } from './ui.jsx'
-import { Magnetic } from './Effects.jsx'
 import { icons } from './icons.jsx'
 
 export default function Contact() {
@@ -20,56 +18,44 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="section contact">
-      <Reveal>
-        <p className="mono accent">06. What's next?</p>
-        <h2 className="contact-title gradient-text">Let's build something great.</h2>
-        <p className="muted contact-text">
-          I'm open to freelance work and full-time opportunities. Whether you have a project in
-          mind or just want to say hi, my inbox is always open.
-        </p>
-        <div className="hero-actions center">
-          <Magnetic>
+    <>
+      <section id="contact" className="section">
+        <Reveal className="contact card">
+          <p className="eyebrow">Contact</p>
+          <h2 className="section-title">Have a project or a role in mind?</h2>
+          <p className="section-intro">
+            I'm open to full-time roles and freelance work — web applications, SaaS platforms and
+            data-driven products.
+            The fastest way to reach me is email — I usually reply within a day.
+          </p>
+          <div className="hero-actions">
             <a href={`mailto:${profile.email}`} className="btn btn-primary">
-              {icons.mail} Say hello
+              {icons.mail} {profile.email}
             </a>
-          </Magnetic>
-          <Magnetic>
-            <button onClick={copy} className="btn btn-ghost">
-              {icons.copy} Copy email
+            <button onClick={copy} className="btn btn-secondary" aria-live="polite">
+              {copied ? icons.check : icons.copy} {copied ? 'Copied' : 'Copy email'}
             </button>
-          </Magnetic>
-          {profile.resume && (
-            <Magnetic>
-              <a href={profile.resume} className="btn btn-ghost" target="_blank" rel="noreferrer">
-                Resume
+            {profile.resume && (
+              <a href={profile.resume} className="btn btn-secondary" target="_blank" rel="noreferrer">
+                {icons.download} Resume
               </a>
-            </Magnetic>
-          )}
-        </div>
-        <div className="socials">
+            )}
+          </div>
+        </Reveal>
+      </section>
+      <footer className="footer">
+        <p>
+          © {new Date().getFullYear()} {profile.name}
+        </p>
+        <div className="footer-links">
           {socials.map(([name, url]) => (
-            <a key={name} href={url} target="_blank" rel="noreferrer" aria-label={name}>
-              {icons[name]}
+            <a key={name} href={url} target="_blank" rel="noreferrer">
+              {name === 'github' ? 'GitHub' : 'LinkedIn'}
             </a>
           ))}
+          <a href={`mailto:${profile.email}`}>Email</a>
         </div>
-      </Reveal>
-      <footer className="footer mono muted small">
-        Designed & built by {profile.name} · © {new Date().getFullYear()}
       </footer>
-      <AnimatePresence>
-        {copied && (
-          <motion.div
-            className="toast mono"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-          >
-            ✓ Email copied to clipboard
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </section>
+    </>
   )
 }
